@@ -44,6 +44,14 @@ public class RateLimitRule {
         return requestType;
     }
 
+    public Integer getAllowedNumberOfRequests() {
+        return allowedNumberOfRequests;
+    }
+
+    public RateLimitTimeInterval getTimeInterval() {
+        return timeInterval;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,5 +67,17 @@ public class RateLimitRule {
     @Override
     public int hashCode() {
         return Objects.hash(accountId, clientIp, requestType, allowedNumberOfRequests, timeInterval);
+    }
+
+    public boolean hasEmptyAccountIdAndClientIp() {
+        return accountId.orElse("").isEmpty() && clientIp.orElse("").isEmpty();
+    }
+
+    public boolean hasEmptyAccountId() {
+        return accountId.orElse("").isEmpty();
+    }
+
+    public boolean hasEmptyClientIp() {
+        return clientIp.orElse("").isEmpty();
     }
 }
